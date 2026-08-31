@@ -3,11 +3,63 @@ import express, { Express, Request, Response } from 'express';
 import cors from 'cors';
 import dotenv from 'dotenv';
 import path from 'path';
+import Database from 'better-sqlite3';
+import fs from 'fs';
 
 // Load environment variables
 dotenv.config({
   path: path.resolve(__dirname, '../../.env.local'),
 });
+
+// Initialize SQLite database
+const dbPath = path.resolve(__dirname, '../../data/app.db');
+const dataDir = path.resolve(__dirname, '../../data');
+if (!fs.existsSync(dataDir)) {
+  fs.mkdirSync(dataDir, { recursive: true });
+}
+const db = new Database(dbPath);
+db.pragma('journal_mode = WAL');
+
+// Initialize database tables
+db.exec(`
+  CREATE TABLE IF NOT EXISTS videos (
+    id TEXT PRIMARY KEY,
+    filename TEXT NOT NULL,
+    originalName TEXT NOT NULL,
+    fileSize INTEGER,
+    duration REAL,
+    uploadedAt TEXT NOT NULL,
+    status TEXT DEFAULT 'pending',
+    s3Url TEXT
+  );
+
+  CREATE TABLE IF NOT EXISTS analyses (
+    id TEXT PRIMARY KEY,
+    videoId TEXT NOT NULL,
+    viralityScore REAL,
+    hookStrength REAL,
+    pacing REAL,
+    emotionalImpact REAL,
+    trendAlignment REAL,
+    recommendations TEXT,
+    attentionCurve TEXT,
+    createdAt TEXT NOT NULL,
+    FOREIGN KEY(videoId) REFERENCES videos(id) ON DELETE CASCADE
+  );
+
+  CREATE TABLE IF NOT EXISTS edits (
+    id TEXT PRIMARY KEY,
+    videoId TEXT NOT NULL,
+    editedVideoUrl TEXT,
+    thumbnailUrl TEXT,
+    caption TEXT,
+    tags TEXT,
+    createdAt TEXT NOT NULL,
+    FOREIGN KEY(videoId) REFERENCES videos(id) ON DELETE CASCADE
+  );
+`);
+
+global.db = db;
 
 const app: Express = express();
 const PORT = process.env.PORT || 5000;

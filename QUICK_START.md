@@ -88,15 +88,14 @@ cp .env.example .env.local
 ### 6. Start Development
 
 ```bash
-# Terminal 1: Start Docker
-docker-compose up
+# Terminal 1: Start Backend
+cd backend
+npm install
+npm run dev
 
 # Terminal 2: Start Frontend
 cd frontend
-npm run dev
-
-# Terminal 3: Start Backend
-cd backend
+npm install
 npm run dev
 ```
 
@@ -157,8 +156,7 @@ git push -u origin main
 - Responsive design with TailwindCSS
 
 ✅ **Infrastructure:**
-- Docker Compose for local development
-- PostgreSQL database setup
+- SQLite database (no setup required!)
 - Environment configuration
 - Complete documentation
 
@@ -213,25 +211,12 @@ GET    /api/ideas?niche=tech           # Get video ideas
 
 ### Port Already in Use
 ```bash
-# Kill all processes
-killall node
-docker-compose down
-```
+# Kill all processes on ports 3000 and 5000
+# On Windows PowerShell:
+Get-Process | Where-Object {$_.Id -eq (Get-NetTCPConnection -LocalPort 3000).OwningProcess} | Stop-Process
 
-### Docker Issues
-```bash
-# Reset everything
-docker-compose down -v
-docker-compose up --build
-```
-
-### Database Connection Error
-```bash
-# Check logs
-docker logs viral_db
-
-# Reset
-docker-compose exec postgres psql -U user -d viral_db -c "SELECT 1"
+# On Mac/Linux:
+lsof -i :3000 -i :5000 | grep LISTEN | awk '{print $2}' | xargs kill -9
 ```
 
 ---
