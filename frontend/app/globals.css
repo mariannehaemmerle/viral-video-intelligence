@@ -1,0 +1,77 @@
+/* frontend/app/globals.css */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+* {
+  @apply box-border;
+}
+
+html {
+  @apply scroll-smooth;
+}
+
+body {
+  @apply bg-white;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  @apply w-2;
+}
+
+::-webkit-scrollbar-track {
+  @apply bg-gray-100;
+}
+
+::-webkit-scrollbar-thumb {
+  @apply bg-orange-400 rounded-full hover:bg-orange-500;
+}
+
+/* Animations */
+@keyframes fadeIn {
+  from {
+    @apply opacity-0;
+  }
+  to {
+    @apply opacity-100;
+  }
+}
+
+@keyframes slideUp {
+  from {
+    @apply translate-y-4 opacity-0;
+  }
+  to {
+    @apply translate-y-0 opacity-100;
+  }
+}
+
+.animate-fade-in {
+  @apply animate-fadeIn;
+}
+
+.animate-slide-up {
+  @apply animate-slideUp;
+}
+
+/* Input Focus Styles */
+input:focus,
+textarea:focus {
+  @apply ring-2 ring-orange-500 ring-offset-2;
+}
+
+/* Loading spinner */
+.loading {
+  @apply inline-block w-4 h-4 border-2 border-gray-300 border-t-orange-600 rounded-full animate-spin;
+}
+
+/* Video player */
+video {
+  @apply w-full h-auto;
+}
+
+/* Link hover effect */
+a {
+  @apply transition-colors;
+}

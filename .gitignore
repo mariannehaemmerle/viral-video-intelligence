@@ -1,0 +1,71 @@
+# Environment variables
+.env
+.env.local
+.env.*.local
+.env.production.local
+
+# Dependencies
+node_modules/
+npm-debug.log
+yarn-error.log
+pnpm-debug.log
+
+# Build outputs
+dist/
+build/
+.next/
+frontend/.next/
+frontend/out/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+
+# Logs
+logs/
+*.log
+*.log.*
+
+# Database
+postgres_data/
+*.db
+*.sqlite
+
+# Video uploads (store in S3, not git)
+uploads/
+videos/
+temp/
+tmp/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Testing
+coverage/
+.nyc_output/
+
+# Docker
+.dockerignore
+docker-compose.override.yml
+
+# API Keys & Secrets
+.env.secrets
+secrets/
+
+# Temporary files
+*.tmp
+*.temp
+.cache/
+
+# Compiled Python (if using scripts)
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Node
+.npm/

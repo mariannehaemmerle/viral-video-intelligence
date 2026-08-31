@@ -1,0 +1,40 @@
+{
+  "name": "viral-video-intelligence",
+  "version": "0.1.0",
+  "description": "AI-powered tool to predict video virality and auto-edit short-form videos",
+  "author": "Marianne Hämmerle <marianne.haemmerle8@gmail.com>",
+  "license": "PRIVATE",
+  "scripts": {
+    "dev": "concurrently \"npm --prefix frontend run dev\" \"npm --prefix backend run dev\"",
+    "frontend": "npm --prefix frontend run dev",
+    "backend": "npm --prefix backend run dev",
+    "build": "npm --prefix frontend run build && npm --prefix backend run build",
+    "test": "npm --prefix frontend run test && npm --prefix backend run test",
+    "test:e2e": "npm --prefix frontend run test:e2e",
+    "lint": "npm --prefix frontend run lint && npm --prefix backend run lint",
+    "format": "npm --prefix frontend run format && npm --prefix backend run format",
+    "migrate": "npm --prefix backend run migrate",
+    "db:reset": "npm --prefix backend run db:reset",
+    "docker:up": "docker-compose up",
+    "docker:down": "docker-compose down",
+    "docker:logs": "docker-compose logs -f"
+  },
+  "devDependencies": {
+    "concurrently": "^8.2.0"
+  },
+  "engines": {
+    "node": ">=18.0.0",
+    "npm": ">=9.0.0"
+  },
+  "keywords": [
+    "viral",
+    "video",
+    "ai",
+    "short-form",
+    "tiktok",
+    "reels",
+    "youtube-shorts",
+    "prediction",
+    "auto-edit"
+  ]
+}
